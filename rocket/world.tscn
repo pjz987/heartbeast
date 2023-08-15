@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkftrprubjqom"]
+
+[ext_resource type="Texture2D" uid="uid://ci8aqsxsreagi" path="res://rocket_ship.png" id="1_j8rrm"]
+
+[node name="World" type="Node2D"]
+position = Vector2(468, 248)
+
+[node name="Rocket" type="Sprite2D" parent="."]
+position = Vector2(112, 144)
+texture = ExtResource("1_j8rrm")
