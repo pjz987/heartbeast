@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjjrvcbj280h"]
+
+[ext_resource type="Texture2D" uid="uid://10x1osbh6k65" path="res://laser.png" id="1_obxyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuete"]
+size = Vector2(6, 6)
+
+[node name="Laser" type="RigidBody2D"]
+gravity_scale = 0.0
+linear_velocity = Vector2(200, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_obxyd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tuete")
