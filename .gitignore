@@ -13,4 +13,6 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
 .DS_Store
+1-Bit Godot Course Resources
