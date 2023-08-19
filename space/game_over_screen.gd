@@ -1,10 +1,12 @@
 extends ColorRect
 
+@onready var highscore_label = $HighscoreLabel
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	var highscore = SaveAndLoad.load_high_score()
+	if highscore == null: return
+	print('no high score')
+	highscore_label.text = 'Highscore : ' + str(highscore)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
