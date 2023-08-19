@@ -2,6 +2,8 @@ extends Area2D
 
 const LASER_SCENE = preload("res://laser.tscn")
 
+signal ship_destroyed
+
 @export var speed = 100
 
 func _process(delta):
@@ -19,3 +21,4 @@ func _process(delta):
 func _on_area_entered(area):
 	queue_free()
 	area.queue_free()
+	ship_destroyed.emit()
