@@ -1,14 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddk8xlvpv5v52"]
+[gd_scene load_steps=8 format=3 uid="uid://ddk8xlvpv5v52"]
 
 [ext_resource type="PackedScene" uid="uid://byfm1oxl46pgq" path="res://player/player.tscn" id="1_vrsp8"]
 [ext_resource type="Script" path="res://world.gd" id="1_wqpvy"]
 [ext_resource type="PackedScene" uid="uid://cfus7y61j4xc5" path="res://world_tile_map.tscn" id="2_ge3mb"]
+[ext_resource type="PackedScene" uid="uid://bsbak45sn5bo5" path="res://world/moving_platform.tscn" id="4_ulhlk"]
+[ext_resource type="Curve2D" uid="uid://bx7mlwh5nns38" path="res://world/left_right_path.tres" id="5_7s178"]
+[ext_resource type="Curve2D" uid="uid://c46guqryo3ph6" path="res://world/up_down_path.tres" id="6_5b2b6"]
+[ext_resource type="Curve2D" uid="uid://wbso3k6p11lw" path="res://world/hex_path.tres" id="7_1rqv1"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_wqpvy")
 
 [node name="Player" parent="." instance=ExtResource("1_vrsp8")]
-position = Vector2(151, 96)
+position = Vector2(134, 82)
 
 [node name="WorldTileMap" parent="." instance=ExtResource("2_ge3mb")]
-layer_0/tile_data = PackedInt32Array(524290, 262144, 4, 524291, 65536, 3, 524292, 524288, 0, 524293, 393216, 3, 524294, 393216, 1, 589830, 0, 2, 589831, 65536, 2, 589832, 327680, 3, 655369, 262144, 3, 655370, 65536, 3, 655371, 65536, 3, 655372, 65536, 3, 655373, 65536, 3, 655374, 65536, 3, 655375, 393216, 3, 655376, 327680, 3, 655377, 65536, 3, 655378, 65536, 3, 655379, 131072, 3, 393236, 131072, 3, 393235, 262144, 3, 458770, 196608, 0, 524306, 458752, 3, 524305, 65536, 3, 524304, 327680, 0, 589840, 131072, 1, 589839, 0, 1, 524303, 0, 0, 524299, 196608, 3, 458764, 196608, 3, 393229, 196608, 3, 327694, 196608, 3, 196608, 0, 2, 196609, 458752, 1, 262145, 262144, 3, 262146, 458752, 0, 327682, 262144, 2, 327683, 131072, 0, 393219, 131072, 2, 393218, 262144, 1, 458754, 458752, 4, 458753, 0, 3, 589826, 196608, 2, 458757, 0, 0, 589828, 196608, 1, 655364, 458752, 2, 655363, 0, 0, 720900, 131072, 2, 720899, 393216, 3, 720898, 65536, 3, 720897, 65536, 3, 720896, 65536, 3, 786431, 262144, 3, 720895, 196608, 1, 655359, 196608, 0, 589833, 458752, 0, 196627, 458752, 0, 262163, 196608, 1, 327699, 196608, 1, 196626, 65536, 3, 196625, 262144, 3, 131089, 458752, 0, 131088, 65536, 3, 131087, 65536, 3, 131086, 262144, 0, 196622, 458752, 3, 196621, 65536, 3, 196620, 65536, 3, 196619, 262144, 3, 131083, 458752, 0, 131082, 65536, 3, 131081, 262144, 3, 65545, 458752, 0, 65544, 65536, 3, 65543, 262144, 0, 131079, 458752, 3, 131078, 65536, 3, 131077, 65536, 3, 131076, 262144, 3, 65540, 458752, 0, 65539, 65536, 3, 65538, 262144, 0, 131074, 458752, 3, 131073, 327680, 0, 131072, 0, 0, 458758, 65536, 0, 524296, 393218, 0, 524295, 327682, 0, 458759, 393218, 0)
+layer_0/tile_data = PackedInt32Array(524290, 262144, 0, 524291, 65536, 3, 524292, 524288, 0, 524293, 393216, 3, 524294, 393216, 1, 589830, 0, 2, 589831, 65536, 2, 589832, 327680, 3, 655369, 262144, 3, 655370, 65536, 3, 655371, 65536, 3, 655372, 65536, 3, 655373, 65536, 3, 655374, 393216, 3, 655375, 65536, 2, 655376, 327680, 3, 655377, 65536, 3, 655378, 65536, 3, 655379, 131072, 3, 458770, 131072, 0, 524306, 131072, 2, 524305, 65536, 2, 524304, 589824, 1, 589840, 131072, 1, 589839, 393216, 2, 524303, 0, 0, 589826, 196608, 2, 458757, 0, 0, 589828, 196608, 1, 655364, 458752, 2, 655363, 0, 0, 720900, 131072, 2, 720899, 393216, 3, 720898, 65536, 3, 720897, 65536, 3, 720896, 65536, 3, 786431, 262144, 3, 720895, 196608, 1, 655359, 196608, 0, 589833, 458752, 0, 458758, 65536, 0, 524296, 393218, 0, 524295, 327682, 0, 458759, 393218, 0, 458769, 65536, 0, 458768, 0, 0, 589838, 0, 0)
+
+[node name="MovingPlatform" parent="." instance=ExtResource("4_ulhlk")]
+position = Vector2(78, 89)
+metadata/_edit_group_ = true
+
+[node name="AnimatableBody2D" parent="MovingPlatform" index="0"]
+position = Vector2(0, 0)
+
+[node name="Path2D" parent="MovingPlatform" index="2"]
+curve = ExtResource("5_7s178")
+
+[node name="PathFollow2D" parent="MovingPlatform/Path2D" index="0"]
+position = Vector2(0, 0)
+progress = 0.0
+
+[node name="MovingPlatform2" parent="." instance=ExtResource("4_ulhlk")]
+position = Vector2(152, 107)
+metadata/_edit_group_ = true
+
+[node name="AnimatableBody2D" parent="MovingPlatform2" index="0"]
+position = Vector2(0, 0)
+
+[node name="Path2D" parent="MovingPlatform2" index="2"]
+curve = ExtResource("6_5b2b6")
+
+[node name="PathFollow2D" parent="MovingPlatform2/Path2D" index="0"]
+position = Vector2(0, 0)
+progress = 0.0
+
+[node name="MovingPlatform3" parent="." instance=ExtResource("4_ulhlk")]
+position = Vector2(163, 62)
+metadata/_edit_group_ = true
+
+[node name="AnimatableBody2D" parent="MovingPlatform3" index="0"]
+position = Vector2(0, 0)
+
+[node name="Path2D" parent="MovingPlatform3" index="2"]
+curve = ExtResource("7_1rqv1")
+
+[node name="PathFollow2D" parent="MovingPlatform3/Path2D" index="0"]
+position = Vector2(0, 0)
+progress = 0.0
+
+[editable path="MovingPlatform"]
+[editable path="MovingPlatform2"]
+[editable path="MovingPlatform3"]
