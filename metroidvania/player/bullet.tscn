@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1rewt3stw885"]
+
+[ext_resource type="PackedScene" uid="uid://wug7i3i7oesh" path="res://projectile.tscn" id="1_1py13"]
+[ext_resource type="Script" path="res://player/bullet.gd" id="2_hiq5w"]
+[ext_resource type="Texture2D" uid="uid://ekxu5x1nx0gc" path="res://player/player_bullet.png" id="2_vl65m"]
+
+[sub_resource type="Animation" id="Animation_fs2lr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_5gvyx"]
+resource_name = "fire"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"set_process"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aktuw"]
+_data = {
+"RESET": SubResource("Animation_fs2lr"),
+"fire": SubResource("Animation_5gvyx")
+}
+
+[node name="Bullet" instance=ExtResource("1_1py13")]
+script = ExtResource("2_hiq5w")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="0"]
+position = Vector2(2.38419e-07, 0)
+scale = Vector2(0.4, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_vl65m")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+autoplay = "fire"
+libraries = {
+"": SubResource("AnimationLibrary_aktuw")
+}

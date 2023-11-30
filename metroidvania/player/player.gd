@@ -9,19 +9,24 @@ const DUST_EFFECT_SECENE = preload("res://effects/dust_effect.tscn")
 @export var jump_force = 128
 @export var max_fall_velocity = 128
 
+@onready var player_blaster = $PlayerBlaster
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
 @onready var coyote_jump_timer = $CoyoteJumpTimer
+@onready var fire_rate_timer = $FireRateTimer
 
 func _physics_process(delta):
 	apply_gravity(delta)
-	var input_axis = Input.get_axis('ui_left', 'ui_right')
+	var input_axis = Input.get_axis('move_left', 'move_right')
 	if is_moving(input_axis):
 		apply_horizontal_force(delta, input_axis)
 	else:
 		apply_friction(delta)
 	jump_check()
 	update_animations(input_axis)
+	if Input.is_action_pressed("fire") and fire_rate_timer.time_left == 0:
+		fire_rate_timer.start()
+		player_blaster.fire_bullet()
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 	var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
@@ -29,10 +34,7 @@ func _physics_process(delta):
 		coyote_jump_timer.start()
 
 func create_dust_effect():
-	var dust_effect = DUST_EFFECT_SECENE.instantiate()
-	var main = get_tree().current_scene
-	main.add_child(dust_effect)
-	dust_effect.global_position = global_position
+	Utils.instantiate_scene_on_world(DUST_EFFECT_SECENE, global_position)
 
 func is_moving(input_axis):
 	return input_axis != 0
@@ -50,17 +52,20 @@ func apply_friction(delta):
 
 func jump_check():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
-		if Input.is_action_just_pressed('ui_up'):
+		if Input.is_action_just_pressed('jump'):
 			velocity.y = -jump_force
 	if not is_on_floor():
-		if (Input.is_action_just_released('ui_up')
+		if (Input.is_action_just_released('jump')
 			and velocity.y < -jump_force / 2):
 			velocity.y = -jump_force / 2
 
 func update_animations(input_axis):
+	if get_local_mouse_position().x != 0:
+		sprite_2d.scale.x = sign(get_local_mouse_position().x)
+	
 	if is_moving(input_axis):
 		animation_player.play('run')
-		sprite_2d.scale.x = sign(input_axis)
+		animation_player.speed_scale = input_axis * sprite_2d.scale.x
 	else:
 		animation_player.play('idle')
 	

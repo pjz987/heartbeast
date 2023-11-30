@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddk8xlvpv5v52"]
+[gd_scene load_steps=4 format=3 uid="uid://ddk8xlvpv5v52"]
 
 [ext_resource type="PackedScene" uid="uid://byfm1oxl46pgq" path="res://player/player.tscn" id="1_vrsp8"]
+[ext_resource type="Script" path="res://world.gd" id="1_wqpvy"]
 [ext_resource type="PackedScene" uid="uid://cfus7y61j4xc5" path="res://world_tile_map.tscn" id="2_ge3mb"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_wqpvy")
 
 [node name="Player" parent="." instance=ExtResource("1_vrsp8")]
 position = Vector2(151, 96)
