@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const DUST_EFFECT_SECENE = preload("res://effects/dust_effect.tscn")
+const JUMP_EFFECT_SCENE = preload('res://effects/jump_effect.tscn')
 
 @export var acceleration = 512
 @export var max_velocity = 64
@@ -15,6 +16,7 @@ const DUST_EFFECT_SECENE = preload("res://effects/dust_effect.tscn")
 @onready var coyote_jump_timer = $CoyoteJumpTimer
 @onready var fire_rate_timer = $FireRateTimer
 @onready var drop_timer = $DropTimer
+@onready var camera_2d = $Camera2D
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -58,6 +60,7 @@ func jump_check():
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed('jump'):
 			velocity.y = -jump_force
+			Utils.instantiate_scene_on_world(JUMP_EFFECT_SCENE, global_position)
 	if not is_on_floor():
 		if (Input.is_action_just_released('jump')
 			and velocity.y < -jump_force / 2):
@@ -79,3 +82,8 @@ func update_animations(input_axis):
 
 func _on_drop_timer_timeout():
 	set_collision_mask_value(2, true)
+
+
+func _on_hurtbox_hurt(hitbox, damage):
+	camera_2d.reparent(get_tree().current_scene)
+	queue_free()

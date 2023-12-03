@@ -5,6 +5,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57ocq"]
 size = Vector2(32, 8)
 
+[sub_resource type="Animation" id="Animation_s4eal"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_j3nfo"]
 resource_name = "path_follow"
 length = 6.0
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_s4eal"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wothd"]
@@ -59,10 +59,10 @@ shape = SubResource("RectangleShape2D_57ocq")
 one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "path_follow"
 libraries = {
 "": SubResource("AnimationLibrary_wothd")
 }
+autoplay = "path_follow"
 
 [node name="Path2D" type="Path2D" parent="."]
 

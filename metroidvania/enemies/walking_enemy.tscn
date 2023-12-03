@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5frfbl8gyydh"]
+
+[ext_resource type="Texture2D" uid="uid://b3wcdy7rjsdpd" path="res://enemies/walking_enemy.png" id="1_ppan1"]
+[ext_resource type="Script" path="res://enemies/walking_enemy.gd" id="1_w4xov"]
+[ext_resource type="PackedScene" uid="uid://dqlo33lluvw2u" path="res://collisions/hurtbox.tscn" id="3_xjtix"]
+[ext_resource type="PackedScene" uid="uid://bl70tjqew3nyw" path="res://collisions/hitbox.tscn" id="4_oe3ki"]
+[ext_resource type="PackedScene" uid="uid://uaurlg3oj1ai" path="res://stats.tscn" id="5_myix1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkfyk"]
+size = Vector2(8, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywpbc"]
+size = Vector2(16, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6beto"]
+size = Vector2(16, 10)
+
+[node name="WalkingEnemy" type="CharacterBody2D"]
+collision_layer = 8
+floor_constant_speed = true
+floor_snap_length = 2.0
+script = ExtResource("1_w4xov")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_ppan1")
+flip_h = true
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_fkfyk")
+
+[node name="FloorCast" type="RayCast2D" parent="."]
+position = Vector2(0, -4)
+target_position = Vector2(0, 12)
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_xjtix")]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_ywpbc")
+
+[node name="Hitbox" parent="." instance=ExtResource("4_oe3ki")]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_6beto")
+
+[node name="Stats" parent="." instance=ExtResource("5_myix1")]
+
+[connection signal="hurt" from="Hurtbox" to="." method="_on_hurtbox_hurt"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
