@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddk8xlvpv5v52"]
+[gd_scene load_steps=10 format=3 uid="uid://ddk8xlvpv5v52"]
 
 [ext_resource type="PackedScene" uid="uid://byfm1oxl46pgq" path="res://player/player.tscn" id="1_vrsp8"]
 [ext_resource type="Script" path="res://world.gd" id="1_wqpvy"]
@@ -8,6 +8,7 @@
 [ext_resource type="Curve2D" uid="uid://c46guqryo3ph6" path="res://world/up_down_path.tres" id="6_5b2b6"]
 [ext_resource type="Curve2D" uid="uid://wbso3k6p11lw" path="res://world/hex_path.tres" id="7_1rqv1"]
 [ext_resource type="PackedScene" uid="uid://c5frfbl8gyydh" path="res://enemies/walking_enemy.tscn" id="8_5havi"]
+[ext_resource type="PackedScene" uid="uid://ivcfumm5a6oh" path="res://ui/health_meter.tscn" id="9_0path"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_wqpvy")
@@ -71,6 +72,14 @@ position = Vector2(270, 68)
 
 [node name="WalkingEnemy4" parent="." instance=ExtResource("8_5havi")]
 position = Vector2(312, 156)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HealthMeter" parent="UI" instance=ExtResource("9_0path")]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
 
 [editable path="MovingPlatform"]
 [editable path="MovingPlatform2"]
