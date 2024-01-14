@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://byfm1oxl46pgq"]
+[gd_scene load_steps=17 format=3 uid="uid://byfm1oxl46pgq"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_e5cn5"]
 [ext_resource type="Texture2D" uid="uid://j72yhkil70vb" path="res://player/player.png" id="1_emhpt"]
@@ -22,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(10, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_majmm"]
@@ -91,43 +103,33 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_my15v"]
+resource_name = "wall_slide"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(10, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_axoxf"]
 _data = {
 "RESET": SubResource("Animation_d8ipc"),
 "idle": SubResource("Animation_majmm"),
 "jump": SubResource("Animation_ukxs2"),
-"run": SubResource("Animation_y1prs")
+"run": SubResource("Animation_y1prs"),
+"wall_slide": SubResource("Animation_my15v")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg157"]
 size = Vector2(8, 14)
-
-[sub_resource type="Animation" id="Animation_tt2fc"]
-resource_name = "blink"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerBlaster:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [false, true, false, true, false, true, false, true, false, true]
-}
 
 [sub_resource type="Animation" id="Animation_kb1a1"]
 length = 0.001
@@ -156,6 +158,33 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_tt2fc"]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerBlaster:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e72b7"]
 _data = {
 "RESET": SubResource("Animation_kb1a1"),
@@ -178,6 +207,7 @@ position = Vector2(2, -8)
 position = Vector2(0, -12)
 texture = ExtResource("1_emhpt")
 hframes = 12
+frame = 10
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Sprite2D"]
 position = Vector2(2, 4)

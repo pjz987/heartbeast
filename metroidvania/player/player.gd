@@ -10,6 +10,9 @@ const JUMP_EFFECT_SCENE = preload('res://effects/jump_effect.tscn')
 @export var jump_force = 128
 @export var max_fall_velocity = 128
 
+var air_jump = false
+var state = move_state
+
 @onready var player_blaster = $PlayerBlaster
 @onready var animation_player = $AnimationPlayer
 @onready var sprite_2d = $Sprite2D
@@ -24,6 +27,9 @@ func _ready():
 	PlayerStats.no_health.connect(die)
 
 func _physics_process(delta):
+	state.call(delta)
+
+func move_state(delta):
 	apply_gravity(delta)
 	var input_axis = Input.get_axis('move_left', 'move_right')
 	if is_moving(input_axis):
@@ -43,6 +49,25 @@ func _physics_process(delta):
 	var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_edge:
 		coyote_jump_timer.start()
+	wall_check()
+
+func wall_slide_state(delta):
+	animation_player.play('wall_slide')
+	wall_jump_check(get_wall_axis())
+
+func get_wall_axis():
+	return get_wall_normal().x
+
+func wall_check():
+	if not is_on_floor() and is_on_wall():
+		state = wall_slide_state
+		air_jump = true
+
+func wall_jump_check(wall_axis):
+	if Input.is_action_just_pressed('jump'):
+		velocity.x = wall_axis * max_velocity
+		state = move_state
+		jump(jump_force * 0.75)
 
 func create_dust_effect():
 	Utils.instantiate_scene_on_world(DUST_EFFECT_SECENE, global_position)
@@ -62,14 +87,22 @@ func apply_friction(delta):
 	velocity.x = move_toward(velocity.x, 0, friction * delta)
 
 func jump_check():
+	if is_on_floor(): air_jump = true
 	if is_on_floor() or coyote_jump_timer.time_left > 0.0:
 		if Input.is_action_just_pressed('jump'):
-			velocity.y = -jump_force
-			Utils.instantiate_scene_on_world(JUMP_EFFECT_SCENE, global_position)
+			jump(jump_force)
 	if not is_on_floor():
 		if (Input.is_action_just_released('jump')
 			and velocity.y < -jump_force / 2):
 			velocity.y = -jump_force / 2
+		if (Input.is_action_just_pressed('jump')
+			and air_jump):
+				jump(jump_force * 0.75)
+				air_jump = false
+
+func jump(force):
+	velocity.y = -force
+	Utils.instantiate_scene_on_world(JUMP_EFFECT_SCENE, global_position)
 
 func update_animations(input_axis):
 	if get_local_mouse_position().x != 0:
