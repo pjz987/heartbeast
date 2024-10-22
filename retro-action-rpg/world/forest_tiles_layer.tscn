@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ccanuwqakfv1l"]
+
+[ext_resource type="TileSet" uid="uid://cf2jtaviegjpp" path="res://world/forest_tileset.tres" id="1_dpvx5"]
+
+[node name="ForestTilesLayer" type="TileMapLayer" groups=["navigation"]]
+y_sort_enabled = true
+tile_set = ExtResource("1_dpvx5")

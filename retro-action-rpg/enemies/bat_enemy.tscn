@@ -1,0 +1,122 @@
+[gd_scene load_steps=13 format=3 uid="uid://ch24hkcg7jcph"]
+
+[ext_resource type="PackedScene" uid="uid://bstwl3wcsk6w5" path="res://enemies/enemy.tscn" id="1_aadcf"]
+[ext_resource type="Texture2D" uid="uid://bybws5dehre6l" path="res://enemies/bat.png" id="2_s0cot"]
+[ext_resource type="Script" path="res://enemies/bat_enemy.gd" id="2_yu2xk"]
+[ext_resource type="Resource" uid="uid://ceiky5vvwv004" path="res://enemies/bat_enemy_movement_stats.tres" id="3_42734"]
+
+[sub_resource type="Animation" id="Animation_jpw88"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_gjhj3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_4ovop"]
+resource_name = "hit"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_qm0ss"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bebha"]
+_data = {
+"RESET": SubResource("Animation_gjhj3"),
+"hit": SubResource("Animation_4ovop"),
+"idle": SubResource("Animation_jpw88"),
+"move": SubResource("Animation_qm0ss")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sleuk"]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i30o0"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gam26"]
+radius = 4.0
+
+[node name="BatEnemy" instance=ExtResource("1_aadcf")]
+script = ExtResource("2_yu2xk")
+movement_stats = ExtResource("3_42734")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_s0cot")
+offset = Vector2(0, -6)
+hframes = 6
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_bebha")
+}
+autoplay = "move"
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_sleuk")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="3"]
+path_desired_distance = 8.0
+target_desired_distance = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -5)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_i30o0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_gam26")
