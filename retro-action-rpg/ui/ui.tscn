@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkxxhjte0fq8f"]
+
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_elv2y"]
+[ext_resource type="Texture2D" uid="uid://bjbrwium4irc" path="res://ui/frame.png" id="2_5ptqw"]
+[ext_resource type="PackedScene" uid="uid://bcncqno7jm4tt" path="res://ui/hero_inventory_manager.tscn" id="2_hsqkk"]
+[ext_resource type="PackedScene" uid="uid://8h8v4a0ip0jg" path="res://ui/description_ui.tscn" id="3_a2q1c"]
+[ext_resource type="PackedScene" uid="uid://c3w0pigxkofr" path="res://ui/health_ui.tscn" id="3_am6d8"]
+[ext_resource type="PackedScene" uid="uid://c4icw5r5o5l74" path="res://ui/actions_ui.tscn" id="6_4vn7g"]
+
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_elv2y")
+
+[node name="Pause" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0941176, 0.180392, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0875
+anchor_top = 0.05
+anchor_right = 0.9125
+anchor_bottom = 0.966667
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HeroInventoryManager" parent="Pause/VBoxContainer/MarginContainer" instance=ExtResource("2_hsqkk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DescriptionUI" parent="Pause/VBoxContainer" instance=ExtResource("3_a2q1c")]
+z_index = 1
+layout_mode = 2
+
+[node name="Frame" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5ptqw")
+
+[node name="HealthUI" parent="." instance=ExtResource("3_am6d8")]
+offset_left = 31.0
+offset_top = 1.0
+offset_right = 289.0
+offset_bottom = 9.0
+
+[node name="ActionsUI" parent="." instance=ExtResource("6_4vn7g")]
+offset_top = 8.0
+offset_right = 28.0
+offset_bottom = 64.0

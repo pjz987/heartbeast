@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3w0pigxkofr"]
+
+[ext_resource type="Script" path="res://ui/health_ui.gd" id="1_pjr7r"]
+[ext_resource type="Texture2D" uid="uid://pcwh0wq0naqh" path="res://ui/health_ui_frame.png" id="2_hkj5a"]
+[ext_resource type="PackedScene" uid="uid://dcgvqn2v6l6hr" path="res://ui/heart_ui.tscn" id="3_ehvfu"]
+[ext_resource type="Texture2D" uid="uid://blh4nadmnvmac" path="res://ui/frame_bar.png" id="4_4848e"]
+
+[node name="HealthUI" type="HBoxContainer"]
+offset_right = 97.0
+offset_bottom = 8.0
+theme_override_constants/separation = 0
+script = ExtResource("1_pjr7r")
+
+[node name="LeftFrame" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("2_hkj5a")
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeartUI" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI2" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI3" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI4" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI5" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI6" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI7" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI8" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI9" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="HeartUI10" parent="Hearts" instance=ExtResource("3_ehvfu")]
+layout_mode = 2
+
+[node name="RightFrame" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("2_hkj5a")
+flip_h = true
+
+[node name="RightBar" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+texture = ExtResource("4_4848e")
+flip_h = true

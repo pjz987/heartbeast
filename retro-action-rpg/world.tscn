@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dg80w37ba2npd"]
+[gd_scene load_steps=8 format=3 uid="uid://dg80w37ba2npd"]
 
 [ext_resource type="PackedScene" uid="uid://mm3wdqgb26p3" path="res://hero/hero.tscn" id="1_pha1r"]
 [ext_resource type="Script" path="res://world.gd" id="1_r3ebi"]
+[ext_resource type="PackedScene" uid="uid://bkxxhjte0fq8f" path="res://ui/ui.tscn" id="2_lk02c"]
 [ext_resource type="Script" path="res://camera/character_camera.gd" id="2_s6lbe"]
 [ext_resource type="PackedScene" uid="uid://tjm18mva2f8l" path="res://levels/level_1.tscn" id="4_bkc6k"]
+[ext_resource type="PackedScene" uid="uid://8niecqpt22ai" path="res://effects/hero_hurt_flash.tscn" id="5_p8dr0"]
+[ext_resource type="Script" path="res://world_systems/pause_manager.gd" id="7_s6vcg"]
 
 [node name="World" type="Node2D" node_paths=PackedStringArray("current_level")]
 script = ExtResource("1_r3ebi")
 current_level = NodePath("Level1")
+
+[node name="UI" parent="." node_paths=PackedStringArray("pause_manager") instance=ExtResource("2_lk02c")]
+visible = false
+pause_manager = NodePath("../PauseManager")
 
 [node name="Hero" parent="." instance=ExtResource("1_pha1r")]
 position = Vector2(159, 97)
@@ -17,3 +24,8 @@ position_smoothing_enabled = true
 script = ExtResource("2_s6lbe")
 
 [node name="Level1" parent="." instance=ExtResource("4_bkc6k")]
+
+[node name="HeroHurtFlash" parent="." instance=ExtResource("5_p8dr0")]
+
+[node name="PauseManager" type="Node" parent="."]
+script = ExtResource("7_s6vcg")

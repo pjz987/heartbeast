@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4icw5r5o5l74"]
+
+[ext_resource type="Script" path="res://ui/actions_ui.gd" id="1_ch8tc"]
+[ext_resource type="PackedScene" uid="uid://bndn83evetyrw" path="res://ui/action_slot_ui.tscn" id="2_e63ja"]
+
+[node name="ActionsUI" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ch8tc")
+
+[node name="ActionSlotUI1" parent="." instance=ExtResource("2_e63ja")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActionSlotUI2" parent="." instance=ExtResource("2_e63ja")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActionSlotUI3" parent="." instance=ExtResource("2_e63ja")]
+unique_name_in_owner = true
+layout_mode = 2

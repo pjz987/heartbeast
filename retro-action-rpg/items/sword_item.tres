@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://0rhi5affiqxa"]
+
+[ext_resource type="Script" path="res://items/weapon_item.gd" id="1_f8w1v"]
+[ext_resource type="Texture2D" uid="uid://3eb2h3umoagb" path="res://items/sword_icon.png" id="1_wap7y"]
+
+[resource]
+script = ExtResource("1_f8w1v")
+damage = 1.0
+knockback = 175
+animation = "sword"
+name = "Sword"
+plural_name = ""
+icon = ExtResource("1_wap7y")
+description = "Use it to vanquish your foes."
+is_equipment = true

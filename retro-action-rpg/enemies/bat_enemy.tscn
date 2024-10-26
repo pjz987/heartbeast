@@ -1,25 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://ch24hkcg7jcph"]
+[gd_scene load_steps=14 format=3 uid="uid://ch24hkcg7jcph"]
 
 [ext_resource type="PackedScene" uid="uid://bstwl3wcsk6w5" path="res://enemies/enemy.tscn" id="1_aadcf"]
 [ext_resource type="Texture2D" uid="uid://bybws5dehre6l" path="res://enemies/bat.png" id="2_s0cot"]
 [ext_resource type="Script" path="res://enemies/bat_enemy.gd" id="2_yu2xk"]
 [ext_resource type="Resource" uid="uid://ceiky5vvwv004" path="res://enemies/bat_enemy_movement_stats.tres" id="3_42734"]
-
-[sub_resource type="Animation" id="Animation_jpw88"]
-resource_name = "idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[ext_resource type="Resource" uid="uid://6agrn8tdaou7" path="res://enemies/bat_enemy_stats.tres" id="4_h008v"]
 
 [sub_resource type="Animation" id="Animation_gjhj3"]
 length = 0.001
@@ -51,6 +36,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_jpw88"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_qm0ss"]
@@ -92,6 +93,7 @@ radius = 4.0
 [node name="BatEnemy" instance=ExtResource("1_aadcf")]
 script = ExtResource("2_yu2xk")
 movement_stats = ExtResource("3_42734")
+stats = ExtResource("4_h008v")
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_s0cot")
@@ -116,6 +118,9 @@ target_desired_distance = 8.0
 position = Vector2(0, -5)
 rotation = -1.57079
 shape = SubResource("CapsuleShape2D_i30o0")
+
+[node name="Hitbox" parent="." index="5"]
+damage = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, -5)

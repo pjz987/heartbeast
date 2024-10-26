@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=3 format=3 uid="uid://b7onk30mwbtga"]
+
+[ext_resource type="Texture2D" uid="uid://ikbcaykf4mcd" path="res://items/big_sword_icon.png" id="1_iwaqg"]
+[ext_resource type="Script" path="res://items/weapon_item.gd" id="1_jia4j"]
+
+[resource]
+script = ExtResource("1_jia4j")
+damage = 1.5
+knockback = 190
+animation = "sword"
+name = "Big Sword"
+plural_name = ""
+icon = ExtResource("1_iwaqg")
+description = "Even more power to vanquish your foes."
+is_equipment = true
